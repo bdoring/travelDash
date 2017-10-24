@@ -1,7 +1,26 @@
 //Update the name of the controller below and rename the file.
-const template = require("../controllers/template.js")
+const users = require("../controllers/users.js")
+const trips = require("../controllers/trips.js")
+
 module.exports = function(app){
 
-  app.get('/', template.index);
+  app.get('/', users.index);
+
+  app.post('/users/login', users.login);
+
+  app.post('/users/register', users.register);
+
+  app.use(loggedUser);
+
+  app.get('/users/:id/flights', trips.getAll);
+
+  function loggedUser(req, res, next) {
+    if (req.session.user) {
+      console.log("there is a session: ", req.session.user);
+      next();
+    } else {
+      res.redirect('/');
+    }
+  }
 
 }
