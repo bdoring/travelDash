@@ -7,7 +7,7 @@ module.exports = {
     if (req.session.message) {
       res.send(req.session.message);
     } else {
-      res.send("Hello");
+      res.render("user_login", {message: 'Please login'});
     }
 
   },
