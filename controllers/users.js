@@ -5,7 +5,7 @@ module.exports = {
   // CHANGE ME TO AN ACTUAL FUNCTION
   index: function(req, res) {
     if (req.session.message) {
-      res.send(req.session.message);
+      res.render("user_login", {message: req.session.message});
     } else {
       res.render("user_login", {message: 'Please login'});
     }
@@ -16,16 +16,23 @@ module.exports = {
     knex('users')
       .where('email', req.body.email)
       .then((encryptedUser) => {
-        encryption.check(req.body, encryptedUser)
-          .then((isValid) => {
-            if (isValid) {
-              req.session.name = encryptedUser.name;
-              res.redirect(`/trips/${encryptedUser.id}`);
-            } else {
-              req.sessions.message = "Invalid username or password. Please try again.";
-              res.redirect('/');
-            }
-          })
+        if (encryptedUser[0]) {
+          console.log(encryptedUser);
+          encryption.check(req.body, encryptedUser[0])
+            .then((isValid) => {
+              if (isValid) {
+                req.session.name = encryptedUser[0].name;
+                res.redirect(`/users/${encryptedUser[0].id}/flights`);
+              } else {
+                req.session.message = "Invalid username or password. Please try again.";
+                res.redirect('/');
+              }
+            })
+        } else {
+          req.session.message = "Invalid username or password. Please try again.";
+          res.redirect('/');
+        }
+
       })
       .catch((err) => {
         console.log(err);
@@ -36,18 +43,19 @@ module.exports = {
 
     let newUser = {
       name: req.body.name,
-      email: req.body.name,
+      email: req.body.email,
       password: req.body.password
     }
 
-    encrypted.hash(newUser)
+    encryption.hash(newUser)
       .then((newEncryptedUser) => {
         knex('users')
           .insert(newEncryptedUser, '*')
           .then((newUser) => {
             console.log(newUser);
-            req.session.id = newUser.id;
-            res.redirect(`/users/${newUser.id}/flights`)
+            req.session.user = newUser[0].name;
+            console.log("req.session.user", req.session.user)
+            res.redirect(`/users/${newUser[0].id}/flights`)
           })
           .catch((err) => {
             console.log(err);
@@ -56,6 +64,5 @@ module.exports = {
       .catch((err) => {
         console.log(err);
       });
-
   }
 }

@@ -16,9 +16,10 @@ module.exports = function(app){
 
   function loggedUser(req, res, next) {
     if (req.session.user) {
-      console.log("there is a session: ", req.session.user);
+      console.log("move along");
       next();
     } else {
+      console.log("redirected");
       res.redirect('/');
     }
   }
