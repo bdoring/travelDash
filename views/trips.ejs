@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome back, <%=  %></h1>
+    <h2>Trip Info</h2>
+    <form action="users/trips" method="post">
+      <input type="integer" name="user_id" value="User ID">
+      <input type="text" name="title" placeholder="Flight Number">
+      <input type="text" name="description" placeholder="Description">
+      <input type="integer" name="flight_id" value="Flight ID">
+      <input type="submit">
+    </form>
+    <% for(var i = 0; trips.length; i++){ %>
+    <div>
+      <h3><a href="users/trips/<%= trips[i].user_id%>"></a>Trip Information</h3>
+      <p><%= trips[i].title%></p>
+      <p><%= trips[i].description%></p>
+      <p><%= trips[i].flight_id%></p>
+    </div>
+    <% } %>
+  </body>
+</html>
