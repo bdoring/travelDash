@@ -7,7 +7,7 @@ module.exports = {
     if (req.session.message) {
       res.render("user_login", {message: req.session.message});
     } else {
-      res.render("user_login", {message: 'Please login'});
+      res.render("user_login", {message: ''});
     }
   },
 
@@ -25,12 +25,12 @@ module.exports = {
                 res.redirect(`/users/${encryptedUser[0].id}/flights`);
               } else {
                 req.session.message = "Invalid username or password. Please try again.";
-                res.redirect('/');
+                res.redirect('/users');
               }
             })
         } else {
           req.session.message = "Invalid username or password. Please try again.";
-          res.redirect('/');
+          res.redirect('/users');
         }
       })
       .catch((err) => {
