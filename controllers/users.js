@@ -9,7 +9,6 @@ module.exports = {
     } else {
       res.render("user_login", {message: 'Please login'});
     }
-
   },
 
   login: function(req, res) {
@@ -20,8 +19,9 @@ module.exports = {
           console.log(encryptedUser);
           encryption.check(req.body, encryptedUser[0])
             .then((isValid) => {
+              console.log(isValid);
               if (isValid) {
-                req.session.name = encryptedUser[0].name;
+                req.session.user = encryptedUser[0].name;
                 res.redirect(`/users/${encryptedUser[0].id}/flights`);
               } else {
                 req.session.message = "Invalid username or password. Please try again.";
@@ -32,7 +32,6 @@ module.exports = {
           req.session.message = "Invalid username or password. Please try again.";
           res.redirect('/');
         }
-
       })
       .catch((err) => {
         console.log(err);
