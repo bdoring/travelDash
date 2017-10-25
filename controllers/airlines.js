@@ -17,7 +17,7 @@ module.exports = {
       .then((airline) => {
         if (airline[0]) {
           if (airline[0].password === req.body.password) {
-            console.log(airline[0].name)
+            console.log(airline[0].name);
             req.session.airline = airline[0].name;
             res.redirect(`/airlines/${airline[0].id}/flights`)
           } else {
