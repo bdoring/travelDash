@@ -5,20 +5,23 @@
     <title></title>
   </head>
   <body>
-    <% for(var i = 0; flights.length; i++){ %>
-    <div>
-      <h3><a href="users/flights/<%%>"></a>Flight Information</h3>
-      <p><%= flights[i].start%></p>
-      <p><%= flights[i].destination%></p>
-      <p><%= flights[i].airline_id%></p>
+
+    <h2><%= airline.name %></h2>
+
+    <h3>Create New Flight:</h3>
+    <form action="/airlines/<%= airline.id %>/flights" method="post">
+      <input type="text" name="start" placeholder="New Start">
+
+      <input type="text" name="destination" placeholder="New Destination">
+      <input type="submit">
+    </form>
+
+    <% for(var i = 0; i < flights.length; i++){ %>
+    <div style="border: 1px solid black">
+      <p>FROM: <%= flights[i].start%> - TO: <%= flights[i].destination%></p>
     </div>
     <% } %>
 
-    <!-- <form action="/member/<%= com.id %>" method="post">
-      <input type="text" name="airline" placeholder="Flight Name">
-      <input type="text" name="em placeholder="Email">
-      <input type="text" name="position" placeholder="Position">
-      <input type="submit"> -->
-    </form>
+
   </body>
 </html>
