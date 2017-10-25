@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <h2><%= airline.name %></h2>
+
+    <h3>Create New Flight:</h3>
+    <form action="/airlines/<%= airline.id %>/flights" method="post">
+      <input type="text" name="start" placeholder="New Start">
+
+      <input type="text" name="destination" placeholder="New Destination">
+      <input type="submit">
+    </form>
+
+    <% for(var i = 0; i < flights.length; i++){ %>
+    <div style="border: 1px solid black">
+      <p>FROM: <%= flights[i].start%> - TO: <%= flights[i].destination%></p>
+    </div>
+    <% } %>
+
+
+  </body>
+</html>

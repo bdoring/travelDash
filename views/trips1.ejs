@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome back, <%= user.name %></h1>
+    <h2>Trip Info</h2>
+    <form action="/users/<%= user.id %>/flights" method="post">
+      <input type="text" name="title" placeholder="Title">
+      <input type="text" name="description" placeholder="Description">
+      <select class="" name="flight_id">
+        <% for (let i = 0; i < flights.length; i++) { %>
+          <option value="<%= flights[i].id %>">
+            START: <%= flights[i].start %> - DESTINATION: <%= flights[i].destination %> - AIRLINE: <%= flights[i].name %></option>
+        <% } %>
+      </select>
+      <input type="submit">
+    </form>
+    <h3><%= message %></h3>
+    <% for(var i = 0; i<trips.length; i++){ %>
+    <div style="border: 1px solid grey">
+      <p>Title: <%= trips[i].title%></p>
+      <p>Description: <%= trips[i].description%></p>
+      <p>FROM: <%= trips[i].start%> - TO: <%= trips[i].destination%> - AIRLINE: <%= trips[i].name%> </p>
+    </div>
+    <% } %>
+  </body>
+</html>
