@@ -37,22 +37,22 @@ Stylesheets
 
 -->
   <!-- Default stylesheets-->
-  <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Template specific stylesheets-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-  <link href="lib/animate.css/animate.css" rel="stylesheet">
-  <link href="lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/et-line-font/et-line-font.css" rel="stylesheet">
-  <link href="lib/flexslider/flexslider.css" rel="stylesheet">
-  <link href="lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
-  <link href="lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
-  <link href="lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+  <link href="/lib/animate.css/animate.css" rel="stylesheet">
+  <link href="/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/lib/et-line-font/et-line-font.css" rel="stylesheet">
+  <link href="/lib/flexslider/flexslider.css" rel="stylesheet">
+  <link href="/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+  <link href="/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+  <link href="/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
   <!-- Main stylesheet and color file-->
-  <link href="css/style.css" rel="stylesheet">
-  <link id="color-scheme" href="css/colors/default.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <link id="color-scheme" href="./css/colors/default.css" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -78,7 +78,7 @@ Stylesheets
                 </ul>
               </li>
     </nav>
-    <section class="home-section bg-dark-30" id="home" data-background="images/background.jpg">
+    <section class="home-section bg-dark-30" id="home" data-background="/images/background.jpg">
       <div class="video-player" data-property="{videoURL:'https://www.youtube.com/watch?v=kShx9caUVDY', containment:'.home-section', startAt:5, mute:false, autoPlay:true, loop:true, opacity:2, showControls:false, showYTLogo:false, vol:25}"></div>
       <div class="video-controls-box">
         <div class="container">
@@ -103,27 +103,44 @@ Stylesheets
               </div>
             </form>
           </div>
+          <h1 class="font-alt mb-90 titan-title-size-3 pr-remove"><%= airline.name %></h1>
           <section class="module">
             <div class="container">
               <div class="row">
                 <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
                 <h4 class="font-alt">Create New Flight:</h4>
-                <!-- <h2><%= airline.name %></h2> -->
+                <hr class="divider-w mb-10">
                 <form class="form" action="/airlines/<%= airline.id %>/flights" method="post">
                   <div class="form-group">
                     <input class="form-control input-lg" type="text" name="start" placeholder="New Start"/>
                   </div>
                   <div class="form-group">
-                    <input class="form-control input-lg" type="text" name="destinaton" placeholder="New Destination"/>
+                    <input class="form-control input-lg" type="text" name="destination" placeholder="New Destination"/>
                   </div>
                   <button class="btn btn-round btn-b">Submit</button>
                 </form>
-                  <!-- <% for(var i = 0; i < flights.length; i++){ %>
-                  <div style="border: 1px solid black">
-                  <p>FROM: <%= flights[i].start%> - TO: <%= flights[i].destination%></p>
-                  </div>
-                <% } %> -->
+
+
               </div>
+
+              <!-- DELETE FROM HERE -->
+
+              <div class="col-sm-5">
+
+                <h4 class="font-alt">Schedule Flights</h4>
+                <hr class="divider-w mb-10">
+                <form class="form" action="/users/register" method="post">
+                  <div class="form-group">
+                    <% for(var i = 0; i < flights.length; i++){ %>
+                    <div>
+                    <input disabled class="form-control mb-20 input-lg" type="text" value="FROM: <%= flights[i].start%> - TO: <%= flights[i].destination%>"/>
+                    </div>
+                  <% } %>
+                </form>
+              </div>
+
+              <!-- TO HERE -->
+
             </div>
           </div>
         </section>
@@ -210,19 +227,19 @@ Stylesheets
 JavaScripts
 =============================================
 -->
-  <script src="lib/jquery/dist/jquery.js"></script>
-  <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="lib/wow/dist/wow.js"></script>
-  <script src="lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
-  <script src="lib/isotope/dist/isotope.pkgd.js"></script>
-  <script src="lib/imagesloaded/imagesloaded.pkgd.js"></script>
-  <script src="lib/flexslider/jquery.flexslider.js"></script>
-  <script src="lib/owl.carousel/dist/owl.carousel.min.js"></script>
-  <script src="lib/smoothscroll.js"></script>
-  <script src="lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
-  <script src="lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/lib/wow/dist/wow.js"></script>
+  <script src="/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+  <script src="/lib/isotope/dist/isotope.pkgd.js"></script>
+  <script src="/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+  <script src="/lib/flexslider/jquery.flexslider.js"></script>
+  <script src="/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+  <script src="/lib/smoothscroll.js"></script>
+  <script src="/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+  <script src="/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script src="/js/plugins.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 
 </html>

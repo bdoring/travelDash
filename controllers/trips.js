@@ -21,6 +21,7 @@ module.exports = {
               .then((flightsList) => {
                 if (tripsList[0]) {
                   var outputMessage = 'Scheduled Flights:';
+
                 } else {
                   var outputMessage = 'You do not have any schedule flights.';
                 }

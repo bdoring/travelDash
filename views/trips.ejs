@@ -37,22 +37,22 @@ Stylesheets
 
 -->
   <!-- Default stylesheets-->
-  <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Template specific stylesheets-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-  <link href="lib/animate.css/animate.css" rel="stylesheet">
-  <link href="lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/et-line-font/et-line-font.css" rel="stylesheet">
-  <link href="lib/flexslider/flexslider.css" rel="stylesheet">
-  <link href="lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
-  <link href="lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
-  <link href="lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+  <link href="/lib/animate.css/animate.css" rel="stylesheet">
+  <link href="/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/lib/et-line-font/et-line-font.css" rel="stylesheet">
+  <link href="/lib/flexslider/flexslider.css" rel="stylesheet">
+  <link href="/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+  <link href="/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+  <link href="/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
   <!-- Main stylesheet and color file-->
-  <link href="css/style.css" rel="stylesheet">
-  <link id="color-scheme" href="css/colors/default.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <link id="color-scheme" href="/css/colors/default.css" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -78,7 +78,7 @@ Stylesheets
                 <li><a href="/Users/taniaroberts/Documents/Galvanize/Projects/travelDash/views/trips.ejs">Trip Information</a></li>
               </ul>
     </nav>
-    <section class="home-section bg-dark-30" id="home" data-background="images/background.jpg">
+    <section class="home-section bg-dark-30" id="home" data-background="/images/background.jpg">
       <div class="video-player" data-property="{videoURL:'https://www.youtube.com/watch?v=kShx9caUVDY', containment:'.home-section', startAt:5, mute:false, autoPlay:true, loop:true, opacity:2, showControls:false, showYTLogo:false, vol:25}"></div>
       <div class="video-controls-box">
         <div class="container">
@@ -95,46 +95,45 @@ Stylesheets
       </div>
       </div>
     </section>
+    <h1 class="font-alt mb-90 titan-title-size-3 pr-remove">Welcome back, <%= user.name %></h1>
     <section class="module">
       <div class="container">
         <div class="row">
           <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
-            <h4 class="font-alt">Login</h4>
+            <h4 class="font-alt">BOOK NEW TRIP:</h4>
             <hr class="divider-w mb-10">
-            <form class="form" action="/users/login" method="post">
+            <form class="form" action="/users/<%= user.id %>/flights" method="post">
               <div class="form-group">
-                  <input class="form-control" type="text" name="email" placeholder="Email Address" />
+                  <input class="form-control" type="text" name="title" placeholder="TITLE" />
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="password" name="password" placeholder="Password" />
+                  <input class="form-control" type="text" name="description" placeholder="DESCRIPTION" />
                 </div>
+                <select class="input-lg mb-10" name="flight_id">
+                  <% for (let i = 0; i < flights.length; i++) { %>
+                    <option value="<%= flights[i].id %>">
+                      START: <%= flights[i].start %> - DESTINATION: <%= flights[i].destination %> - AIRLINE: <%= flights[i].name %></option>
+                  <% } %>
+                </select>
+
                 <div class="form-group">
-                <button class="btn btn-round btn-b">Login</button>
-              </div>
-              <div class="form-group"><a href="">Forgot Password?</a>
+                <!-- <button class="btn btn-round btn-b">Login</button> -->
+                <input type="submit" class="btn btn-round btn-b" value="BOOK YOUR ADVENTURE">
               </div>
             </form>
           </div>
           <div class="col-sm-5">
-            <!-- <b><%= message %></b> -->
-            <h4 class="font-alt">Register</h4>
+            <h4 class="font-alt"><%= message %></h4>
             <hr class="divider-w mb-10">
             <form class="form" action="/users/register" method="post">
-              <div class="form-group">
-                <input class="form-control" type="text" name="email" placeholder="Email Address" />
-              </div>
-              <div class="form-group">
-                <input class="form-control" type="text" name="name" placeholder="First and Last Name" />
-              </div>
-              <div class="form-group">
-                <input class="form-control" type="password" name="password" placeholder="Password" />
-              </div>
-              <div class="form-group">
-                <input class="form-control" type="password" name="re-password" placeholder="Re-enter Password" />
-              </div>
-              <div class="form-group">
-                <button class="btn btn-block btn-round btn-b">Register</button>
-              </div>
+              <div>
+                <% for(var i = 0; i < trips.length; i++){ %>
+                <div class="mb-10" style="border: 1px solid #EAEAEA; border-radius: 2px; padding: 5px; font-size: 15px;">
+                  <p><b>TITLE: </b><%= trips[i].title%></p>
+                  <p><b>DESCRIPTION: </b> <%= trips[i].description%></p>
+                  <p><b>FROM: </b> <%= trips[i].start%> - <b>TO: </b> <%= trips[i].destination%> - <b>AIRLINE: </b>  <%= trips[i].name%> </p>
+                </div>
+              <% } %>
             </form>
           </div>
         </div>
@@ -219,19 +218,19 @@ Stylesheets
 JavaScripts
 =============================================
 -->
-  <script src="lib/jquery/dist/jquery.js"></script>
-  <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="lib/wow/dist/wow.js"></script>
-  <script src="lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
-  <script src="lib/isotope/dist/isotope.pkgd.js"></script>
-  <script src="lib/imagesloaded/imagesloaded.pkgd.js"></script>
-  <script src="lib/flexslider/jquery.flexslider.js"></script>
-  <script src="lib/owl.carousel/dist/owl.carousel.min.js"></script>
-  <script src="lib/smoothscroll.js"></script>
-  <script src="lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
-  <script src="lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/lib/wow/dist/wow.js"></script>
+  <script src="/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+  <script src="/lib/isotope/dist/isotope.pkgd.js"></script>
+  <script src="/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+  <script src="/lib/flexslider/jquery.flexslider.js"></script>
+  <script src="/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+  <script src="/lib/smoothscroll.js"></script>
+  <script src="/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+  <script src="/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script src="/js/plugins.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 
 </html>
